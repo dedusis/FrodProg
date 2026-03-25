@@ -23,7 +23,15 @@ const getStudentService = async (): Promise<IStudent[]> => {
     return Student.find().sort({ createdAt: -1 });
 }
 
+const getStudentByIdService = async (
+    id: string
+): Promise<IStudent | null> => {
+    return Student.findById(id);
+}
+
+
 export {
     createStudentService,
-    getStudentService
+    getStudentService,
+    getStudentByIdService
 };

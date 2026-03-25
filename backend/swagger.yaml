@@ -31,6 +31,23 @@ paths:
         200:
           description: List of students
 
+  /api/students/{id}:
+     get:
+       summary: Get student by ID
+       tags:
+         - Students
+       parameters:
+         - in: path
+           name: id
+           required: true
+           schema:
+             type: string
+       responses:
+         200:
+           description: Student found
+         404:
+           description: Not found
+
 components:
   schemas:
     Student:

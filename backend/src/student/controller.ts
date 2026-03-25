@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { 
     createStudentService,
-    getStudentService
+    getStudentService,
+    getStudentByIdService
 } from './service';
 
 const createStudent = async (req: Request, res: Response) => {
@@ -23,7 +24,32 @@ const getStudent = async (req: Request, res: Response) => {
     }
 };
 
+const getStudentByid = async (
+    req: Request<{ id: string }>,
+    res: Response) => {
+    try{
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json({ message: 'Invalid student id' });
+            return;
+        }
+
+        const student = await getStudentByIdService(id);
+
+        if (!student) {
+            res.status(404).json({ message: 'Student not found' });
+            return;
+        }
+
+        res.status(200).json(student);
+    }   catch (error) {
+        res.status(500).json({ message: 'Failed to fetch student', error });
+    }
+};
+
 export {
     createStudent,
-    getStudent
+    getStudent,
+    getStudentByid
 };
