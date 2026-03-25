@@ -23,6 +23,14 @@ paths:
         201:
           description: Student created
 
+    get:
+      summary: Get all students
+      tags:
+        - Students
+      responses:
+        200:
+          description: List of students
+
 components:
   schemas:
     Student:

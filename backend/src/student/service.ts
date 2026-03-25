@@ -19,6 +19,11 @@ const createStudentService = async (
     return student;
 };
 
+const getStudentService = async (): Promise<IStudent[]> => {
+    return Student.find().sort({ createdAt: -1 });
+}
+
 export {
-    createStudentService
+    createStudentService,
+    getStudentService
 };
